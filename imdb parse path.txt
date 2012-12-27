@@ -1,0 +1,55 @@
+/********************************************************************************
+*																				*
+*	<!xxx/> -> optional															*
+*	#TITLE = name (year) <!(info)/> <!{<!episodeName/><!{episodeNum}/>}/>		*
+*																				*
+********************************************************************************/
+
+movies -> #TITLE Year
+
+ratings -> Dist.Num Votes Rank #TITLE
+
+genres -> #TITLE Genre
+
+language -> #TITLE Language
+
+run-time -> #TITLE <!country:/>time <!(detail1)/> <!(detail2)/>
+
+aka-title -> #TITLE
+				(aka #TITLE) <!(detail1)/> <!(detail2)/>
+				.....................
+				.....................\n\n
+
+countries -> #TITLE Country
+
+taglines -> # #TITLE
+				TagLine
+				.......
+				.......\n\n
+
+plot -> --------------------------
+		MV: #TITLE
+
+		PL: PlotLine1
+		PL: PlotLine2
+		PL: .........
+
+		BY: By\n\n
+
+trivia -> # #TITLE
+			- trivia1
+			  ...........
+			  ...........
+
+			- trivia2
+			  ...........
+			  ...........\n\n
+
+directors -> Lastname, Firstname #TITLE <!(detail)/>
+				#TITLE <!(detail)/>\n\n
+
+actors -> Lastname, Firstname #TITLE <!(detail)/> <!(detail)/> <![role]/> <!<billingPosition>/>
+				#TITLE <!(detail)/> <!(detail)/> <![role]/> <!<billingPosition>/>
+
+actress -> Lastname, Firstname #TITLE <!(detail)/> <!(detail)/> <![role]/> <!<billingPosition>/>
+				#TITLE <!(detail)/> <!(detail)/> <![role]/> <!<billingPosition>/>
