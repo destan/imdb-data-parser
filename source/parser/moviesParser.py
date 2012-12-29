@@ -19,7 +19,7 @@ from ..utils.Utils import *
 
 startTime = time.time()
 
-file = open("/home/destan/Desktop/movies.list")
+file = open("/home/destan/Desktop/movies.list", "r", encoding='iso-8859-1') #TODO: use from properties
 outputFile = open("/home/destan/Desktop/movies.out", "w")
 counter = 0
 fuckedUpCount = 0
