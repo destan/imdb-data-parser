@@ -32,12 +32,12 @@ for line in file:
   if(isMatch):
     outputFile.write(matcher.group(1) + "," + matcher.group(2) + "," + matcher.group(3) + "," + matcher.group(5) + "," + matcher.group(6) + "," + matcher.group(7) + "," + matcher.group(8) + "\n")
   else:
-    print "This line is fucked up: " + line
+    print("This line is fucked up: " + line)
     fuckedUpCount += 1
 
 outputFile.flush()
 outputFile.close()
 file.close()
 
-print "Finished with " + str(fuckedUpCount) + " fucked up line\n"
-print "Duration: " + str(round(time.time() - startTime))
+print("Finished with " + str(fuckedUpCount) + " fucked up line\n")
+print("Duration: " + str(round(time.time() - startTime)))

@@ -32,7 +32,7 @@ for line in file:
     elif(matcher.group(1) == "BY"):
       continue
     else:
-      print "Unhandled abbreviation: " + matcher.group(1) + " in " + line
+      print("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
   #else:
     #just ignore this part, useless lines
   
@@ -43,5 +43,5 @@ outputFile.flush()
 outputFile.close()
 file.close()
 
-print "Finished with " + str(fuckedUpCount) + " fucked up line\n"
-print "Duration: " + str(round(time.time() - startTime))
+print("Finished with " + str(fuckedUpCount) + " fucked up line\n")
+print("Duration: " + str(round(time.time() - startTime)))
