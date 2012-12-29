@@ -8,6 +8,10 @@ Requirements
 ================
 Python 3.x
 
+Configuring
+================
+All configuration data stays at source/settings.py
+You need to edit this file before running the project
 
 Execute
 -------
