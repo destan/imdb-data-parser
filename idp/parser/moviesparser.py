@@ -15,7 +15,7 @@ flags: gm
 """
 
 import time
-from ..utils.Utils import *
+from ..utils.regexhelper import *
 from .. import settings
 
 startTime = time.time()
@@ -34,7 +34,7 @@ for line in file:
         outputFile.write(matcher.group(1) + "," + matcher.group(2) + "," + matcher.group(3) + "," + matcher.group(5) + "," + matcher.group(6) + "," + matcher.group(7) + "," + matcher.group(8) + "\n")
     else:
         print("This line is fucked up: " + line)
-    fuckedUpCount += 1
+        fuckedUpCount += 1
 
 outputFile.flush()
 outputFile.close()

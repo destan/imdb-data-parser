@@ -1,5 +1,5 @@
 import time
-from ..utils.Utils import *
+from ..utils.regexhelper import *
 
 startTime = time.time()
 

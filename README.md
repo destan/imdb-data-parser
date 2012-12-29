@@ -10,10 +10,10 @@ Python 3.x
 
 Configuring
 ================
-All configuration data stays at source/settings.py
+All configuration data stays at idp/settings.py
 You need to edit this file before running the project
 
 Execute
 -------
 
-    ~/imdb-data-parser$ python -m source.parser.moviesParser
+    ~/imdb-data-parser$ python -m idp.parser.moviesparser
