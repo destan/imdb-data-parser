@@ -11,7 +11,7 @@ IMDB_DESTINATION_DIR = None
 
 try:
 	optlist = getopt.getopt(sys.argv[1:], 's:d')
-	
+
 except getopt.error as err:
 	print('Troubles with arguments.')
 	print(HELP)

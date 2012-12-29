@@ -16,23 +16,24 @@ flags: gm
 
 import time
 from ..utils.Utils import *
+from .. import settings
 
 startTime = time.time()
 
-file = open("/home/destan/Desktop/movies.list", "r", encoding='iso-8859-1') #TODO: use from properties
-outputFile = open("/home/destan/Desktop/movies.out", "w")
+file = open(settings.INPUT_FILE, "r", encoding='iso-8859-1')
+outputFile = open(settings.OUTPUT_FILE, "w")
 counter = 0
 fuckedUpCount = 0
 matcherPattern = "(.*?) (\(\S{4,}\))\s?(\(.+\))?\s?(\{(.*?)(\(.+?\))\})?\s*(\{\{SUSPENDED\}\})?\s*(.*$)"
 
 for line in file:
-  matcher = RegExHelper(line)
-  isMatch = matcher.match(matcherPattern)
+    matcher = RegExHelper(line)
+    isMatch = matcher.match(matcherPattern)
 
-  if(isMatch):
-    outputFile.write(matcher.group(1) + "," + matcher.group(2) + "," + matcher.group(3) + "," + matcher.group(5) + "," + matcher.group(6) + "," + matcher.group(7) + "," + matcher.group(8) + "\n")
-  else:
-    print("This line is fucked up: " + line)
+    if(isMatch):
+        outputFile.write(matcher.group(1) + "," + matcher.group(2) + "," + matcher.group(3) + "," + matcher.group(5) + "," + matcher.group(6) + "," + matcher.group(7) + "," + matcher.group(8) + "\n")
+    else:
+        print("This line is fucked up: " + line)
     fuckedUpCount += 1
 
 outputFile.flush()

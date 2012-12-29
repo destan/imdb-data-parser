@@ -15,26 +15,25 @@ title = ""
 plot = ""
 
 for line in file:
-  matcher = RegExHelper(line)
-  isMatch = matcher.match(matcherPattern)
+    matcher = RegExHelper(line)
+    isMatch = matcher.match(matcherPattern)
 
-  if(isMatch):
-    if(matcher.group(1) == "MV"): #Title
+    if(isMatch):
+        if(matcher.group(1) == "MV"): #Title
+            if(title != ""):
+                outputFile.write(title + seperator + plot + "\n")
 
-      if(title != ""):
-        outputFile.write(title + seperator + plot + "\n")
+            plot = ""
+            title = matcher.group(2)
 
-      plot = ""
-      title = matcher.group(2)
-
-    elif(matcher.group(1) == "PL"): #Descriptive text
-      plot += matcher.group(2)
-    elif(matcher.group(1) == "BY"):
-      continue
-    else:
-      print("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
-  #else:
-    #just ignore this part, useless lines
+        elif(matcher.group(1) == "PL"): #Descriptive text
+            plot += matcher.group(2)
+        elif(matcher.group(1) == "BY"):
+            continue
+        else:
+            print("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
+    #else:
+        #just ignore this part, useless lines
   
 # Covers the last item
 outputFile.write(title + seperator + plot + "\n")
