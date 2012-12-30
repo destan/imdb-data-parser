@@ -1,5 +1,5 @@
 from abc import *
-from ..utils.fileopenhandler import *
+from ..utils.filehandler import *
 
 class BaseParser(metaclass=ABCMeta):
     """Common methods for all parser classes"""
@@ -21,10 +21,10 @@ class BaseParser(metaclass=ABCMeta):
             raise NotImplemented("Mode: " + self.preferencesMap["mode"])
 
     def get_input_file(self):
-        return openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
+        return openfile(get_full_path(self.inputFileName))
 
     def get_output_file(self):
-        return open(self.preferencesMap["destinationPath"] + self.inputFileName + ".tsv", "w")
+        return open(get_full_path_for_tsv(self.inputFileName), "w")
 
     @abstractproperty
     def baseMatcherPattern(self):
