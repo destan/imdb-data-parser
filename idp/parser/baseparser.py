@@ -11,9 +11,13 @@ class BaseParser(metaclass=ABCMeta):
     def parseIntoDB(self):
         raise NotImplemented
 
-    def startProcessing(self, preferencesMap):
-        if(preferencesMap["type"] == "tsv"):
+    def startProcessing(self):
+        if(self.preferencesMap["mode"] == "TSV"):
             self.parseIntoTSV()
+        elif(self.preferencesMap["mode"] == "SQL"):
+            self.parseIntoDB()
+        else:
+            raise NotImplemented("Mode: " + self.preferencesMap["mode"])
 
     @abstractproperty
     def baseMatcherPattern(self):
@@ -25,4 +29,8 @@ class BaseParser(metaclass=ABCMeta):
 
     @abstractproperty
     def numberOfLinesToBeSkipped(self):
+        raise NotImplemented
+
+    @abstractproperty
+    def preferencesMap(self):
         raise NotImplemented

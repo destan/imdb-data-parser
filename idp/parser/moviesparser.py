@@ -1,6 +1,6 @@
 from .baseparser import BaseParser
 from ..utils.regexhelper import *
-from .. import settings
+from ..utils.fileopenhandler import *
 
 class MoviesParser(BaseParser):
   """
@@ -18,17 +18,33 @@ class MoviesParser(BaseParser):
      group 8: (.*$)                               year
   """
   
+  # properties
   baseMatcherPattern = "(.*?) (\(\S{4,}\))\s?(\(.+\))?\s?(\{(.*?)(\(.+?\))\})?\s*(\{\{SUSPENDED\}\})?\s*(.*$)"
   inputFileName = "movies.list"
   numberOfLinesToBeSkipped = 15
+
+  def __init__(self, preferencesMap):
+      self._preferencesMap = preferencesMap
+
+  @property
+  def preferencesMap(self):
+      """Get the current voltage."""
+      return self._preferencesMap
+
+  # def __init__(self, preferencesMapX):
+  #   self.preferencesMap = preferencesMapX
+
+  # @property
+  # def preferencesMap():
+  #   return self.preferencesMap
 
   def parseIntoTSV(self):
       import time
 
       startTime = time.time()
 
-      file = open( settings.INPUT_PATH + self.inputFileName, "r", encoding='iso-8859-1')
-      outputFile = open(settings.OUTPUT_PATH + self.inputFileName + ".tsv", "w")
+      file = openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
+      outputFile = open(self.preferencesMap["destinationPath"] + self.inputFileName + ".tsv", "w")
       counter = 0
       fuckedUpCount = 0
       numberOfProcessedLines = 0

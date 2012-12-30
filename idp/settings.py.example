@@ -1,7 +1,3 @@
-INPUT_FILE = "/home/user/movies.list"
-INPUT_DIRECTORY = "/home/user/imdb_lists/"
-OUTPUT_FILE = "/home/user/movies.out"
-OUTPUT_DIRECTORY = "home/user/idp_files/"
 INTERFACES_SERVER = "ftp.fu-berlin.de"
 INTERFACES_DIRECTORY = "pub/misc/movies/database/"
 #alternative servers:
