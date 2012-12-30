@@ -62,6 +62,6 @@ for item in settings.LISTS:
         continue
     print("Parsing " + item + "...")
     parser = ParserClass(preferencesMap)
-    parser.startProcessing()
+    parser.start_processing()
 
 print ("All done, enjoy ;)")

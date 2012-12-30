@@ -1,23 +1,30 @@
 from abc import *
+from ..utils.fileopenhandler import *
 
 class BaseParser(metaclass=ABCMeta):
     """Common methods for all parser classes"""
 
     @abstractmethod
-    def parseIntoTSV(self):
+    def parse_into_tsv(self):
         raise NotImplemented
 
     @abstractmethod
-    def parseIntoDB(self):
+    def parse_into_db(self):
         raise NotImplemented
 
-    def startProcessing(self):
+    def start_processing(self):
         if(self.preferencesMap["mode"] == "TSV"):
-            self.parseIntoTSV()
+            self.parse_into_tsv()
         elif(self.preferencesMap["mode"] == "SQL"):
-            self.parseIntoDB()
+            self.parse_into_db()
         else:
             raise NotImplemented("Mode: " + self.preferencesMap["mode"])
+
+    def get_input_file(self):
+        return openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
+
+    def get_output_file(self):
+        return open(self.preferencesMap["destinationPath"] + self.inputFileName + ".tsv", "w")
 
     @abstractproperty
     def baseMatcherPattern(self):
