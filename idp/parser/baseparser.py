@@ -4,6 +4,8 @@ from ..utils.filehandler import *
 class BaseParser(metaclass=ABCMeta):
     """Common methods for all parser classes"""
 
+    seperator = "\t"
+
     @abstractmethod
     def parse_into_tsv(self):
         raise NotImplemented

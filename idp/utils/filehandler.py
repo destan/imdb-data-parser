@@ -29,6 +29,23 @@ def get_full_path(filename, isCompressed = False):
 def get_full_path_for_tsv(filename):
     return get_full_path(filename) + ".tsv"
 
+def get_decompressed_file_name(fullpath):
+    return fullpath[:-3]
+
+def extract(fullpath):
+    try:
+        print('started to extract list: ', fullpath)
+        with gzip.open(fullpath, 'rb') as f:
+            file_content = f.read()
+        listfile = open(get_decompressed_file_name(fullpath), 'wb')
+        listfile.write(file_content)
+        listfile.close()
+        print(fullpath, 'list extracted successfully')
+    except Exception as e:
+        print('error when extracting list: ' + fullpath + "\n\t" + str(e))
+        return 1
+    return 0
+
 def openfile(fullFilePath):
 
     print("Trying to find file:", fullFilePath)
@@ -50,10 +67,10 @@ def openfile(fullFilePath):
     print("Trying to find file:", fullFilePath + ".gz")
     if os.path.isfile(fullFilePath + ".gz"):
         print("File found:", fullFilePath + ".gz")
-        if extract(inputDir, inputFileName) == 0:
+        if extract(fullFilePath + ".gz") == 0:
             return open(fullFilePath, "r", encoding='iso-8859-1')
         else:
             raise RuntimeError("Unknown error occured")
     print("File cannot be found:", fullFilePath + ".gz")
 
-    raise BaseException("FileNotFoundError")
+    raise RuntimeError("FileNotFoundError: " + fullFilePath)

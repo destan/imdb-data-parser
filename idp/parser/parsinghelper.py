@@ -22,9 +22,12 @@ class ParsingHelper(object):
             try:
                 ParserClass = get_parser_class_for(item)
             except Exception as e:
-                print ("No parser found for: " + item + "\n\tException is: " + e.message)
+                print ("No parser found for: " + item + "\n\tException is: " + str(e))
                 continue
             print("Parsing " + item + "...")
             parser = ParserClass(preferencesMap)
-            parser.start_processing()
+            try:
+                parser.start_processing()
+            except Exception as e:
+                print("File not found for " + item + "\n\tException is: " + str(e))
         print("Parsing finished.")

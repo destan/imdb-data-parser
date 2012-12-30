@@ -15,7 +15,7 @@ class PlotParser(BaseParser):
     # properties
     baseMatcherPattern = "(.+?): (.*)"
     inputFileName = "plot.list"
-    numberOfLinesToBeSkipped = 0
+    numberOfLinesToBeSkipped = 15
 
     def __init__(self, preferencesMap):
         self._preferencesMap = preferencesMap
@@ -36,29 +36,33 @@ class PlotParser(BaseParser):
         title = ""
         plot = ""
 
-        for line in inputFile:
-            matcher = RegExHelper(line)
-            isMatch = matcher.match(self.baseMatcherPattern)
+        numberOfProcessedLines = 0
 
-            if(isMatch):
-                if(matcher.group(1) == "MV"): #Title
-                    if(title != ""):
-                        outputFile.write(title + seperator + plot + "\n")
+        for line in inputFile :
+            if(numberOfProcessedLines > self.numberOfLinesToBeSkipped):
+                matcher = RegExHelper(line)
+                isMatch = matcher.match(self.baseMatcherPattern)
 
-                    plot = ""
-                    title = matcher.group(2)
+                if(isMatch):
+                    if(matcher.group(1) == "MV"): #Title
+                        if(title != ""):
+                            outputFile.write(title + self.seperator + plot + "\n")
 
-                elif(matcher.group(1) == "PL"): #Descriptive text
-                    plot += matcher.group(2)
-                elif(matcher.group(1) == "BY"):
-                    continue
-                else:
-                    print("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
-            #else:
-                #just ignore this part, useless lines
+                        plot = ""
+                        title = matcher.group(2)
+
+                    elif(matcher.group(1) == "PL"): #Descriptive text
+                        plot += matcher.group(2)
+                    elif(matcher.group(1) == "BY"):
+                        continue
+                    else:
+                        print("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
+                #else:
+                    #just ignore this part, useless lines
+            numberOfProcessedLines +=  1
           
         # Covers the last item
-        outputFile.write(title + seperator + plot + "\n")
+        outputFile.write(title + self.seperator + plot + "\n")
           
         outputFile.flush()
         outputFile.close()

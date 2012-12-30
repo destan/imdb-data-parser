@@ -3,7 +3,7 @@
 import sys
 import argparse
 from idp.parser.parsinghelper import ParsingHelper
-from idp import settings
+from idp.settings import *
 
 # check python version
 if sys.version_info.major != 3:
@@ -11,8 +11,8 @@ if sys.version_info.major != 3:
 
 parser = argparse.ArgumentParser(description="an IMDB data parser")
 parser.add_argument('-m', '--mode', help='Parsing mode, defines output of parsing process. Default: CSV', choices=['TSV', 'SQL', 'DB'])
-parser.add_argument('-s', '--source_dir', help='source directory of interface lists', required=True)
-parser.add_argument('-d', '--destination_dir', help='destination directory for outputs', required=True)
+parser.add_argument('-s', '--source_dir', help='source directory of interface lists')
+parser.add_argument('-d', '--destination_dir', help='destination directory for outputs')
 parser.add_argument('-u', '--update_lists', action='store_true', help='downloads lists from server')
 
 args = parser.parse_args()
@@ -29,16 +29,26 @@ if args.update_lists:
 print("Parsing, please wait. This may take very long time...")
 
 # preparing preferences map
-if(args.mode is not None):
+if args.mode:
     mode = args.mode
 else: #default
     mode = "TSV"
 
+if args.source_dir:
+    sourcePath = args.source_dir
+else:
+    sourcePath = SOURCE_PATH
+
+if args.destination_dir:
+    destinationPath = args.source_dir
+else:
+    destinationPath = DESTINATION_PATH
+
 preferencesMap = {
     "mode":mode, 
     "destinationDir": args.destination_dir,
-    "sourcePath": args.source_dir,
-    "destinationPath": args.destination_dir
+    "sourcePath": sourcePath,
+    "destinationPath": destinationPath
 }
 
 ParsingHelper.parse_all(preferencesMap)
