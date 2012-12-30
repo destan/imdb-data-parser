@@ -2,7 +2,7 @@
 
 import sys
 import argparse
-from idp.parser.moviesparser import MoviesParser
+from idp.parser.parsinghelper import ParsingHelper
 from idp import settings
 
 # check python version
@@ -20,19 +20,6 @@ print("mode:", args.mode)
 print("source_dir:", args.source_dir)
 print("destination_dir:", args.destination_dir)
 print("update_lists:", args.update_lists)
-
-
-def get_parser_class_for( itemName ):
-    """
-    Thanks to http://stackoverflow.com/a/452981
-    """
-    kls = "idp.parser." + itemName + "parser." + itemName.title() + "Parser"
-    parts = kls.split('.')
-    module = ".".join(parts[:-1])
-    m = __import__( module )
-    for comp in parts[1:]:
-        m = getattr(m, comp)            
-    return m
 
 if args.update_lists:
     from idp.utils import listdownloader
@@ -54,14 +41,6 @@ preferencesMap = {
     "destinationPath": args.destination_dir
 }
 
-for item in settings.LISTS:
-    try:
-        ParserClass = get_parser_class_for(item)
-    except Exception:
-        print ("No parser found for: " + item)
-        continue
-    print("Parsing " + item + "...")
-    parser = ParserClass(preferencesMap)
-    parser.start_processing()
+ParsingHelper.parse_all(preferencesMap)
 
 print ("All done, enjoy ;)")
