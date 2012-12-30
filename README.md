@@ -16,4 +16,6 @@ You need to edit this file before running the project
 Execute
 -------
 
-    ~/imdb-data-parser$ python -m idp.parser.moviesparser
+    ~/imdb-data-parser$ python3 imdbparser.py
+
+You can use -h parameter to see list of optional arguments
