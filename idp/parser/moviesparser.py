@@ -43,7 +43,11 @@ class MoviesParser(BaseParser):
 
       startTime = time.time()
 
-      file = openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
+      try:
+        file = openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
+      except Exception:
+        print ("No proper file found for: " + self.inputFileName)
+        return
       outputFile = open(self.preferencesMap["destinationPath"] + self.inputFileName + ".tsv", "w")
       counter = 0
       fuckedUpCount = 0
