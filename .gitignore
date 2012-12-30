@@ -40,3 +40,6 @@ nosetests.xml
 
 #swap files of vim
 *.swp
+
+#dont commit settings file
+idp/settings.py

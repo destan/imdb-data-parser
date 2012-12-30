@@ -1,7 +1,7 @@
-INPUT_FILE = "/home/xaph/movies.list"
-INPUT_DIRECTORY = "/home/xaph/imdb_lists/"
-OUTPUT_FILE = "/home/xaph/movies.out"
-OUTPUT_DIRECTORY = "home/xaph/idp_files/"
+INPUT_FILE = "/home/user/movies.list"
+INPUT_DIRECTORY = "/home/user/imdb_lists/"
+OUTPUT_FILE = "/home/user/movies.out"
+OUTPUT_DIRECTORY = "home/user/idp_files/"
 INTERFACES_SERVER = "ftp.fu-berlin.de"
 INTERFACES_DIRECTORY = "pub/misc/movies/database/"
 #alternative servers:
