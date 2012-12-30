@@ -1,2 +1,2 @@
-INPUT_FILE = "/home/xaph/movies.list"
-OUTPUT_FILE = "/home/xaph/movies.out"
+INPUT_PATH = "/home/destan/Desktop/"
+OUTPUT_PATH = "/home/destan/Desktop/"
