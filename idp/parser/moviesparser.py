@@ -44,7 +44,7 @@ class MoviesParser(BaseParser):
       startTime = time.time()
 
       try:
-        file = openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
+        file = openfile(self.preferencesMap["sourcePath"], self.inputFileName)
       except Exception:
         print ("No proper file found for: " + self.inputFileName)
         return
