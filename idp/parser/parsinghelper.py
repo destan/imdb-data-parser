@@ -22,7 +22,7 @@ class ParsingHelper(object):
             try:
                 ParserClass = get_parser_class_for(item)
             except Exception as e:
-                print ("No parser found for: " + item + "\n\tException is: " + e.value)
+                print ("No parser found for: " + item + "\n\tException is: " + e.message)
                 continue
             print("Parsing " + item + "...")
             parser = ParserClass(preferencesMap)
