@@ -1,6 +1,6 @@
 from .baseparser import BaseParser
 from ..utils.regexhelper import *
-from .. import settings
+from ..utils.fileopenhandler import *
 
 class MoviesParser(BaseParser):
   """
@@ -43,7 +43,7 @@ class MoviesParser(BaseParser):
 
       startTime = time.time()
 
-      file = open( self.preferencesMap["sourcePath"] + self.inputFileName, "r", encoding='iso-8859-1')
+      file = openfile(self.preferencesMap["sourcePath"] + self.inputFileName)
       outputFile = open(self.preferencesMap["destinationPath"] + self.inputFileName + ".tsv", "w")
       counter = 0
       fuckedUpCount = 0
