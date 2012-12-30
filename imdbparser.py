@@ -2,7 +2,11 @@
 
 import sys
 import argparse
+<<<<<<< Updated upstream
 from idp.parser.moviesparser import MoviesParser
+=======
+from idp.parser import moviesparser
+>>>>>>> Stashed changes
 
 # check python version
 if sys.version_info.major != 3:
@@ -17,9 +21,15 @@ args = parser.parse_args()
 print("type:", args.type)
 print("source_dir:", args.source_dir)
 print("destination_dir:", args.destination_dir)
+<<<<<<< Updated upstream
 print("Parsing, please wait. This may take very long time...")
 
 preferencesMap = {"type":args.type.lower(), "destinationDir": args.destination_dir}
 
 movieParser = MoviesParser()
 movieParser.startProcessing(preferencesMap)
+=======
+print(args)
+
+moviesparser.parseLists()
+>>>>>>> Stashed changes
