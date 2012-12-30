@@ -10,16 +10,13 @@ Python 3.x
 
 Configuring
 ================
-All configuration data stays at idp/settings.py.example
-You need to copy this file as settings.py andedit this file before running the project
+All configuration data stays at `idp/settings.py.example`
 
--------
+You need to copy this file as `settings.py` and edit this file before running the project
 
     cd idp
     cp settings.py.example settings.py
     your_favourite_editor settings.py
-
-
 
 Execute
 -------
