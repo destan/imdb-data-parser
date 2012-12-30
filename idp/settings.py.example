@@ -1,3 +1,6 @@
+SOURCE_PATH = "/home/destan/Desktop/"
+DESTINATION_PATH = "/home/destan/Desktop/"
+
 INTERFACES_SERVER = "ftp.fu-berlin.de"
 INTERFACES_DIRECTORY = "pub/misc/movies/database/"
 #alternative servers:
