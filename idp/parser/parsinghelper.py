@@ -1,4 +1,5 @@
 from idp import settings
+import logging
 
 class ParsingHelper(object):
     """ParsingHelper manages parsing order"""
@@ -22,12 +23,12 @@ class ParsingHelper(object):
             try:
                 ParserClass = get_parser_class_for(item)
             except Exception as e:
-                print ("No parser found for: " + item + "\n\tException is: " + str(e))
+                logging.error("No parser found for: " + item + "\n\tException is: " + str(e))
                 continue
-            print("Parsing " + item + "...")
+            logging.info("Parsing " + item + "...")
             parser = ParserClass(preferencesMap)
             try:
                 parser.start_processing()
             except Exception as e:
-                print("File not found for " + item + "\n\tException is: " + str(e))
-        print("Parsing finished.")
+                logging.error("File not found for " + item + "\n\tException is: " + str(e))
+        logging.info("Parsing finished.")

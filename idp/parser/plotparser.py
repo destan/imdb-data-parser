@@ -1,5 +1,6 @@
 from .baseparser import BaseParser
 from ..utils.regexhelper import *
+import logging
 
 class PlotParser(BaseParser):
     """
@@ -56,7 +57,7 @@ class PlotParser(BaseParser):
                     elif(matcher.group(1) == "BY"):
                         continue
                     else:
-                        print("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
+                        logging.critical("Unhandled abbreviation: " + matcher.group(1) + " in " + line)
                 #else:
                     #just ignore this part, useless lines
             numberOfProcessedLines +=  1
@@ -68,8 +69,8 @@ class PlotParser(BaseParser):
         outputFile.close()
         inputFile.close()
 
-        print("Finished with " + str(fuckedUpCount) + " fucked up line\n")
-        print("Duration: " + str(round(time.time() - startTime)))
+        logging.info("Finished with " + str(fuckedUpCount) + " fucked up line\n")
+        logging.info("Duration: " + str(round(time.time() - startTime)))
 
     def parse_into_db(self):
         #TODO

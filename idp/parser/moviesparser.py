@@ -1,5 +1,6 @@
 from .baseparser import BaseParser
 from ..utils.regexhelper import *
+import logging
 
 class MoviesParser(BaseParser):
     """
@@ -48,7 +49,7 @@ class MoviesParser(BaseParser):
             if(isMatch):
                 outputFile.write(matcher.group(1) + "," + matcher.group(2) + "," + matcher.group(3) + "," + matcher.group(5) + "," + matcher.group(6) + "," + matcher.group(7) + "," + matcher.group(8) + "\n")
             else:
-                print("This line is fucked up: " + line)
+                logging.critical("This line is fucked up: " + line)
                 fuckedUpCount += 1
           numberOfProcessedLines +=  1
 
@@ -56,8 +57,8 @@ class MoviesParser(BaseParser):
         outputFile.close()
         inputFile .close()
 
-        print("Finished with " + str(fuckedUpCount) + " fucked up line\n")
-        print("Duration: " + str(round(time.time() - startTime)))
+        logging.info("Finished with " + str(fuckedUpCount) + " fucked up line\n")
+        logging.info("Duration: " + str(round(time.time() - startTime)))
 
     def parse_into_db(self):
         #TODO

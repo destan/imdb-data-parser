@@ -1,18 +1,19 @@
 import gzip
 import os.path
 from ..settings import *
+import logging
 
 def full(filename):
     try:
-        print('started to extract list: ', filename)
+        logging.info('started to extract list: %s', filename)
         with gzip.open(get_full_path(filename) + '.list.gz', 'rb') as f:
             file_content = f.read()
         listfile = open(get_full_path(filename) +'.list', 'wb')
         listfile.write(file_content)
         listfile.close()
-        print(filename, 'list extracted successfully')
+        logging.info(filename, 'list extracted successfully')
     except:
-        print('error when extracting list:'. filename)
+        logging.error('error when extracting list: %s', filename)
         return 1
     return 0
 
@@ -22,9 +23,9 @@ def get_full_path(filename, isCompressed = False):
     filename should be without '.list'
     """
     if(isCompressed):
-        return SOURCE_PATH + filename + ".gz"
+        return os.path.join(SOURCE_PATH, filename) + ".gz"
     else:
-        return SOURCE_PATH + filename
+        return os.path.join(SOURCE_PATH, filename)
 
 def get_full_path_for_tsv(filename):
     return get_full_path(filename) + ".tsv"
@@ -34,26 +35,26 @@ def get_decompressed_file_name(fullpath):
 
 def extract(fullpath):
     try:
-        print('started to extract list: ', fullpath)
+        logging.info('started to extract list: %s', fullpath)
         with gzip.open(fullpath, 'rb') as f:
             file_content = f.read()
         listfile = open(get_decompressed_file_name(fullpath), 'wb')
         listfile.write(file_content)
         listfile.close()
-        print(fullpath, 'list extracted successfully')
+        logging.info(fullpath + ' list extracted successfully')
     except Exception as e:
-        print('error when extracting list: ' + fullpath + "\n\t" + str(e))
+        logging.error('error when extracting list: %s' + fullpath + "\n\t" + str(e))
         return 1
     return 0
 
 def openfile(fullFilePath):
 
-    print("Trying to find file:", fullFilePath)
+    logging.info("Trying to find file: %s", fullFilePath)
     if os.path.isfile(fullFilePath):
-        print("File found:", fullFilePath)
+        logging.info("File found: %s", fullFilePath)
         return open(fullFilePath, "r", encoding='iso-8859-1')
 
-    print("File cannot be found:", fullFilePath)
+    logging.error("File cannot be found: %s", fullFilePath)
 
 #
 #this part removed until python 3.3 becomes available for ubuntu LTS and debian
@@ -64,13 +65,13 @@ def openfile(fullFilePath):
 #       return gzip.open(fullFilePath, 'rt')
 #   print("File cannot be found:", fullFilePath)
 
-    print("Trying to find file:", fullFilePath + ".gz")
+    logging.info("Trying to find file: %s", fullFilePath + ".gz")
     if os.path.isfile(fullFilePath + ".gz"):
-        print("File found:", fullFilePath + ".gz")
+        logging.info("File found: %s", fullFilePath + ".gz")
         if extract(fullFilePath + ".gz") == 0:
             return open(fullFilePath, "r", encoding='iso-8859-1')
         else:
             raise RuntimeError("Unknown error occured")
-    print("File cannot be found:", fullFilePath + ".gz")
+    logging.error("File cannot be found: %s", fullFilePath + ".gz")
 
     raise RuntimeError("FileNotFoundError: " + fullFilePath)
