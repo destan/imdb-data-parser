@@ -1,11 +1,11 @@
 from ..settings import *
 from ftplib import FTP
 import gzip
-from filehandler import *
+from .filehandler import *
 import logging
 
 def download():
-    logging.info("lists will downloaded from server:", INTERFACES_SERVER)
+    logging.info("lists will downloaded from server:" + INTERFACES_SERVER)
 
     ftp = FTP(INTERFACES_SERVER)
     ftp.login()
@@ -21,5 +21,5 @@ def download():
         except:
             logging.error("ERROR: there is a problem when downloading list " + list)
 
-    logging.info(download_count, " lists are downloaded")
+    logging.info(download_count + " lists are downloaded")
     ftp.quit()
