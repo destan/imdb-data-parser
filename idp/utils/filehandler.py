@@ -3,20 +3,6 @@ import os.path
 from ..settings import *
 import logging
 
-def full(filename):
-    try:
-        logging.info('started to extract list: %s', filename)
-        with gzip.open(get_full_path(filename) + '.list.gz', 'rb') as f:
-            file_content = f.read()
-        listfile = open(get_full_path(filename) +'.list', 'wb')
-        listfile.write(file_content)
-        listfile.close()
-        logging.info(filename, 'list extracted successfully')
-    except:
-        logging.error('error when extracting list: %s', filename)
-        return 1
-    return 0
-
 def get_full_path(filename, isCompressed = False):
     """
     constructs a full path for a dump file in the SOURCE_PATH
@@ -43,7 +29,7 @@ def extract(fullpath):
         listfile.close()
         logging.info(fullpath + ' list extracted successfully')
     except Exception as e:
-        logging.error('error when extracting list: %s' + fullpath + "\n\t" + str(e))
+        logging.error('error when extracting list: ' + fullpath + "\n\t" + str(e))
         return 1
     return 0
 
