@@ -17,7 +17,7 @@ def download():
                 open(SOURCE_PATH+list+'.list.gz', 'wb').write)
             logging.info(list + "list downloaded successfully")
             download_count = download_count+1
-            extract(list)
+            extract(get_full_path(list+".list", True))
         except Exception as e:
             print("ERROR: there is a problem when downloading list " + list + "\n\t" + str(e))
     logging.info(download_count + " lists are downloaded")
