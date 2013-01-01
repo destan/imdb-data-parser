@@ -13,13 +13,12 @@ def download():
     for list in LISTS:
         try:
             logging.info("started to download list:" + list)
-            r = ftp.retrbinary('RETR pub/misc/movies/database/'+list+'.list.gz',
-                open(INPUT_DIRECTORY + list + '.list.gz', 'wb').write)
+            r = ftp.retrbinary('RETR '+INTERFACES_DIRECTORY+list+'.list.gz',
+                open(SOURCE_PATH+list+'.list.gz', 'wb').write)
             logging.info(list + "list downloaded successfully")
             download_count = download_count+1
             extract(list)
-        except:
-            logging.error("ERROR: there is a problem when downloading list " + list)
-
+        except Exception as e:
+            print("ERROR: there is a problem when downloading list " + list + "\n\t" + str(e))
     logging.info(download_count + " lists are downloaded")
     ftp.quit()
