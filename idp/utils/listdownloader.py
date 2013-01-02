@@ -20,5 +20,5 @@ def download():
             extract(get_full_path(list+".list", True))
         except Exception as e:
             print("ERROR: there is a problem when downloading list " + list + "\n\t" + str(e))
-    logging.info(download_count + " lists are downloaded")
+    logging.info(str(download_count) + " lists are downloaded")
     ftp.quit()
