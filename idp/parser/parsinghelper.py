@@ -26,9 +26,9 @@ class ParsingHelper(object):
                 logging.error("No parser found for: " + item + "\n\tException is: " + str(e))
                 continue
             logging.info("Parsing " + item + "...")
-            parser = ParserClass(preferencesMap)
+            parser = ParserClass()
             try:
-                parser.start_processing()
+                parser.start_processing(preferencesMap)
             except Exception as e:
                 logging.error("File not found for " + item + "\n\tException is: " + str(e))
         logging.info("Parsing finished.")

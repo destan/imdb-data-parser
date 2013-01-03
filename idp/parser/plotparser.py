@@ -18,14 +18,7 @@ class PlotParser(BaseParser):
     inputFileName = "plot.list"
     numberOfLinesToBeSkipped = 15
 
-    def __init__(self, preferencesMap):
-        self._preferencesMap = preferencesMap
-
-    @property
-    def preferencesMap(self):
-        return self._preferencesMap
-
-    def parse_into_tsv(self):
+    def _BaseParser__iterate(self):
         import time
         startTime = time.time()
 
@@ -71,7 +64,3 @@ class PlotParser(BaseParser):
 
         logging.info("Finished with " + str(fuckedUpCount) + " fucked up line\n")
         logging.info("Duration: " + str(round(time.time() - startTime)))
-
-    def parse_into_db(self):
-        #TODO
-        pass

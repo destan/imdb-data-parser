@@ -5,22 +5,14 @@ class BaseParser(metaclass=ABCMeta):
     """Common methods for all parser classes"""
 
     seperator = "\t"
+    mode = "INVALID"
 
-    @abstractmethod
-    def parse_into_tsv(self):
-        raise NotImplemented
-
-    @abstractmethod
-    def parse_into_db(self):
-        raise NotImplemented
-
-    def start_processing(self):
-        if(self.preferencesMap["mode"] == "TSV"):
-            self.parse_into_tsv()
-        elif(self.preferencesMap["mode"] == "SQL"):
-            self.parse_into_db()
+    def start_processing(self, preferencesMap):
+        if(preferencesMap["mode"] == "TSV" or preferencesMap["mode"] == "SQL"):
+            self.mode = preferencesMap["mode"]
         else:
-            raise NotImplemented("Mode: " + self.preferencesMap["mode"])
+            raise NotImplemented("Mode: " + preferencesMap["mode"])
+        self.__iterate()
 
     def get_input_file(self):
         return openfile(get_full_path(self.inputFileName))
@@ -38,8 +30,4 @@ class BaseParser(metaclass=ABCMeta):
 
     @abstractproperty
     def numberOfLinesToBeSkipped(self):
-        raise NotImplemented
-
-    @abstractproperty
-    def preferencesMap(self):
         raise NotImplemented

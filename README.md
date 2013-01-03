@@ -18,8 +18,14 @@ You need to copy this file as `settings.py` and edit this file before running th
     cp settings.py.example settings.py
     your_favourite_editor settings.py
 
-Execute
--------
+Configuring DB
+--------------
+
+    sudo -u postgres createuser -D -A -P mynewuser
+    sudo -u postgres createdb -O mynewuser mydatabase
+
+Executing
+=========
 
     ~/imdb-data-parser$ python3 imdbparser.py
 
