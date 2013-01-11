@@ -1,6 +1,8 @@
 imdb-data-parser
 ================
 
+    This repo is *obsolete* now, active development is ongoing in https://github.com/dedeler/imdb-data-parser
+
 Parses the IMDB dumps into CSV and Relational Database insert queries
 Uses IMDB dumps from: http://www.imdb.com/interfaces
 
